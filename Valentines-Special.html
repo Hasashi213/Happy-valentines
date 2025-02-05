@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffccd5;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        h1 {
+            color: #d6336c;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .yes-button {
+            background-color: #d6336c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .no-button {
+            background-color: white;
+            color: #d6336c;
+            padding: 10px 20px;
+            border: 2px solid #d6336c;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+        }
+        .love-letter {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -55%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            transform: rotate(-45deg);
+            animation: float 3s infinite ease-in-out;
+        }
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: red;
+            border-radius: 50%;
+        }
+        .heart::before {
+            top: -10px;
+            left: 0;
+        }
+        .heart::after {
+            left: 10px;
+            top: 0;
+        }
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg); opacity: 1; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-100px) rotate(-45deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you be my Valentine, Artemis? ❤️</h1>
+        <div class="buttons">
+            <button class="yes-button" onclick="yesClicked()">Yes!</button>
+            <button class="no-button" id="noButton" onmouseover="moveNoButton()">No</button>
+        </div>
+    </div>
+
+    <div class="love-letter" id="loveLetter">
+        <h2>My Dearest Artemis,</h2>
+        <p>I know we haven't talked in a while, and for that, I sincerely apologize. Life gets busy, but the truth is, every moment apart has only made me realize how much I miss you.</p>
+        <p>They say the stars shine brighter when you're in love, but I think they get jealous when you walk by. You light up my world in a way nothing else can, and I can't imagine my days without you.</p>
+        <p>So, what do you say, my love? Let's make the universe jealous together. ❤️</p>
+        <p>Forever Yours,</p>
+        <p>Johannes</p>
+    </div>
+
+    <script>
+        function yesClicked() {
+            document.getElementById("loveLetter").style.display = "block";
+            createHearts();
+        }
+        function moveNoButton() {
+            let button = document.getElementById("noButton");
+            let x = Math.random() * window.innerWidth * 0.6;
+            let y = Math.random() * window.innerHeight * 0.6;
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = window.innerHeight + "px";
+                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 3000);
+            }
+        }
+    </script>
+</body>
+</html>
